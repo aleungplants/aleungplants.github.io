@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="https://example.com/images/favicon.png" />
+<title>You should use theme_set() in addition to theme() in ggplot | Arthur Leung</title>
+<meta name="title" content="You should use theme_set() in addition to theme() in ggplot" />
+<meta name="description" content="A function I found recently" />
+<meta name="keywords" content="code," />
+
+
+<meta property="og:title" content="You should use theme_set() in addition to theme() in ggplot" />
+<meta property="og:description" content="A function I found recently" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/you-should-use-theme_set-in-addition-to-theme-in-ggplot/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-11-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-11-21T00:00:00+00:00" /><meta property="og:site_name" content="Arthur Leung" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="You should use theme_set() in addition to theme() in ggplot"/>
+<meta name="twitter:description" content="A function I found recently"/>
+
+
+
+<meta itemprop="name" content="You should use theme_set() in addition to theme() in ggplot">
+<meta itemprop="description" content="A function I found recently"><meta itemprop="datePublished" content="2023-11-21T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-11-21T00:00:00+00:00" />
+<meta itemprop="wordCount" content="158">
+<meta itemprop="keywords" content="code," />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+  :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #fff;
+      --heading-color: #222;
+      --text-color: #444;
+      --link-color: #3273dc;
+      --visited-color:  #8b6fcb;
+      --code-background-color: #f2f2f2;
+      --code-color: #222;
+      --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      :root {
+          --background-color: #01242e;
+          --heading-color: #eee;
+          --text-color: #ddd;
+          --link-color: #8cc2dd;
+          --visited-color:  #8b6fcb;
+          --code-background-color: #000;
+          --code-color: #ddd;
+          --blockquote-color: #ccc;
+      }
+  }
+
+  body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+      color: var(--text-color);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+  }
+
+  a {
+      color: var(--link-color);
+      cursor: pointer;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  nav a {
+      margin-right: 8px;
+  }
+
+  strong, b {
+      color: var(--heading-color);
+  }
+
+  button {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  time {
+   	font-family: monospace;
+    	font-style: normal;
+    	font-size: 15px;
+  }
+
+  main {
+      line-height: 1.6;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  hr {
+      border: 0;
+      border-top: 1px dashed;
+  }
+
+  img {
+      max-width: 100%;
+  }
+
+  code {
+      font-family: monospace;
+      padding: 2px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+  }
+
+  blockquote {
+      border-left: 1px solid #999;
+      color: var(--code-color);
+      padding-left: 20px;
+      font-style: italic;
+  }
+
+  footer {
+      padding: 25px 0;
+      text-align: center;
+  }
+
+  .title:hover {
+      text-decoration: none;
+  }
+
+  .title h1 {
+      font-size: 1.5em;
+  }
+
+  .inline {
+      width: auto !important;
+  }
+
+  .highlight, .code {
+      padding: 1px 15px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+  }
+
+  ul.blog-posts li {
+      display: flex;
+  }
+
+  ul.blog-posts li span {
+      flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+      color: var(--visited-color);
+  }
+</style>
+
+</head>
+
+<body>
+  <header><a href="/" class="title">
+  <h2>Arthur Leung</h2>
+</a>
+<nav><a href="/">Home</a>
+
+
+<a href="/blog">Blog</a>
+
+</nav>
+</header>
+  <main>
+
+<h1>You should use theme_set() in addition to theme() in ggplot</h1>
+<p>
+  <i>
+    <time datetime='2023-11-21'>
+      21 Nov, 2023
+    </time>
+  </i>
+</p>
+
+<content>
+  <p><code>theme_set()</code> takes theme objects as its argument, and it will apply it to all subsequent ggplots. For example, you can do <code>theme_set(theme_bw())</code> and it&rsquo;ll apply <code>theme_bw()</code> to all your ggplots. I personally like cowplot::theme_cowplot() as a starting theme to modify.</p>
+<p>You can also use ggplot-style addition to add multiple theme objects (and <code>theme_set()</code> will apply them all to the ggplots.</p>
+<p>Helpful for consistency across all your figures - no more copy and pasting <code>theme()</code>s.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">
+<span style="color:#a6e22e">library</span>(ggplot2)
+
+ggplot2<span style="color:#f92672">::</span><span style="color:#a6e22e">theme_set</span>(cowplot<span style="color:#f92672">::</span><span style="color:#a6e22e">theme_cowplot</span>(line_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.25</span>, font_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>) <span style="color:#f92672">+</span>
+                     <span style="color:#a6e22e">theme</span>(axis.ticks.length <span style="color:#f92672">=</span> <span style="color:#a6e22e">unit</span>(<span style="color:#ae81ff">-3</span>, <span style="color:#e6db74">&#34;pt&#34;</span>),
+                           legend.title <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_blank</span>()))
+
+<span style="color:#a6e22e">ggplot</span>(iris, <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Sepal.Length, y <span style="color:#f92672">=</span> Petal.Length)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_point</span>(<span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> Species, color <span style="color:#f92672">=</span> Species, shape <span style="color:#f92672">=</span> Species),
+             stroke <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.25</span>,
+             size <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_shape_manual</span>(values <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">21</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">24</span>)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_fill_viridis_d</span>(alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_color_viridis_d</span>(alpha <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.8</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_x_continuous</span>(limits <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-0.5</span>,<span style="color:#ae81ff">9</span>), breaks <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">3</span>)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_y_continuous</span>(limits <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-0.5</span>,<span style="color:#ae81ff">9</span>), breaks <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">3</span>)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">coord_cartesian</span>(expand <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme</span>(legend.position <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.85</span>),
+        legend.text <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(face <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;italic&#34;</span>))
+
+</code></pre></div><p><img src="/images/2023-11-21-theme-set.jpg" alt="example figure generated using ggsave"></p>
+
+</content>
+<p>
+  
+  <a href="https://example.com/blog/code/">#code</a>
+  
+</p>
+
+  </main>
+  <footer>Made with <a href="https://github.com/janraasch/hugo-bearblog/">Hugo ʕ•ᴥ•ʔ Bear</a>
+</footer>
+
+    
+</body>
+
+</html>

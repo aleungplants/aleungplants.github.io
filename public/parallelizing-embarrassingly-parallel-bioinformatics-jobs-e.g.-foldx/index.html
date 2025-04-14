@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="https://example.com/images/favicon.png" />
+<title>Parallelizing &#34;embarrassingly parallel&#34; bioinformatics jobs, e.g., FoldX | Arthur Leung</title>
+<meta name="title" content="Parallelizing &#34;embarrassingly parallel&#34; bioinformatics jobs, e.g., FoldX" />
+<meta name="description" content="Running analyses in parallel" />
+<meta name="keywords" content="code,science," />
+
+
+<meta property="og:title" content="Parallelizing &#34;embarrassingly parallel&#34; bioinformatics jobs, e.g., FoldX" />
+<meta property="og:description" content="Running analyses in parallel" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/parallelizing-embarrassingly-parallel-bioinformatics-jobs-e.g.-foldx/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2025-04-14T00:00:00+00:00" />
+<meta property="article:modified_time" content="2025-04-14T00:00:00+00:00" /><meta property="og:site_name" content="Arthur Leung" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Parallelizing &#34;embarrassingly parallel&#34; bioinformatics jobs, e.g., FoldX"/>
+<meta name="twitter:description" content="Running analyses in parallel"/>
+
+
+
+<meta itemprop="name" content="Parallelizing &#34;embarrassingly parallel&#34; bioinformatics jobs, e.g., FoldX">
+<meta itemprop="description" content="Running analyses in parallel"><meta itemprop="datePublished" content="2025-04-14T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2025-04-14T00:00:00+00:00" />
+<meta itemprop="wordCount" content="598">
+<meta itemprop="keywords" content="code,science," />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+  :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #fff;
+      --heading-color: #222;
+      --text-color: #444;
+      --link-color: #3273dc;
+      --visited-color:  #8b6fcb;
+      --code-background-color: #f2f2f2;
+      --code-color: #222;
+      --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      :root {
+          --background-color: #01242e;
+          --heading-color: #eee;
+          --text-color: #ddd;
+          --link-color: #8cc2dd;
+          --visited-color:  #8b6fcb;
+          --code-background-color: #000;
+          --code-color: #ddd;
+          --blockquote-color: #ccc;
+      }
+  }
+
+  body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+      color: var(--text-color);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+  }
+
+  a {
+      color: var(--link-color);
+      cursor: pointer;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  nav a {
+      margin-right: 8px;
+  }
+
+  strong, b {
+      color: var(--heading-color);
+  }
+
+  button {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  time {
+   	font-family: monospace;
+    	font-style: normal;
+    	font-size: 15px;
+  }
+
+  main {
+      line-height: 1.6;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  hr {
+      border: 0;
+      border-top: 1px dashed;
+  }
+
+  img {
+      max-width: 100%;
+  }
+
+  code {
+      font-family: monospace;
+      padding: 2px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+  }
+
+  blockquote {
+      border-left: 1px solid #999;
+      color: var(--code-color);
+      padding-left: 20px;
+      font-style: italic;
+  }
+
+  footer {
+      padding: 25px 0;
+      text-align: center;
+  }
+
+  .title:hover {
+      text-decoration: none;
+  }
+
+  .title h1 {
+      font-size: 1.5em;
+  }
+
+  .inline {
+      width: auto !important;
+  }
+
+  .highlight, .code {
+      padding: 1px 15px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+  }
+
+  ul.blog-posts li {
+      display: flex;
+  }
+
+  ul.blog-posts li span {
+      flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+      color: var(--visited-color);
+  }
+</style>
+
+</head>
+
+<body>
+  <header><a href="/" class="title">
+  <h2>Arthur Leung</h2>
+</a>
+<nav><a href="/">Home</a>
+
+
+<a href="/blog">Blog</a>
+
+</nav>
+</header>
+  <main>
+
+<h1>Parallelizing &#34;embarrassingly parallel&#34; bioinformatics jobs, e.g., FoldX</h1>
+<p>
+  <i>
+    <time datetime='2025-04-14'>
+      14 Apr, 2025
+    </time>
+  </i>
+</p>
+
+<content>
+  <blockquote>
+<p>In parallel computing, an <strong>embarrassingly parallel</strong> workload or problem (also called embarrassingly parallelizable, perfectly parallel, delightfully parallel or pleasingly parallel) is one where little or no effort is needed to split the problem into a number of parallel tasks. This is due to minimal or no dependency upon communication between the parallel tasks, or for results between them.</p>
+</blockquote>
+<p>&ndash;<a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel">&ldquo;Embarrassingly parallel&rdquo; on Wikipedia</a></p>
+<p>One of FoldX&rsquo;s functions is predicting the effect of a mutation on the stability of a protein crystal structure, as indexed by the change in free energy of folding (∆∆<em>G</em><sub>fold</sub>).</p>
+<p>In BuildModel, you give it a <code>individual_list</code> file in which each line represents one or mutations to apply to the crystal structure, in the format of residue-chain-position-mutated residue, e.g., <code>MA309I;</code> mutates a methionine at site 309 on chain A to an isoleucine. You can multiple mutations, e.g., <code>MA309I,MB309I,MC309I,MD309I;</code> mutates chains A to D.</p>
+<p>FoldX then iterates over the <code>individual_list</code> and spits out files with the predicted ∆∆<em>G</em><sub>fold</sub> and its various subcomponents. Each line is independent from other lines in the <code>individual_list</code> file, so its jobs can be considered &ldquo;embarrassingly parallel&rdquo;.</p>
+<p>I needed to run a file with 174 different sets of mutations, which was going to take a loooong time on my computer. So, thanks to a suggestion by my colleague Matt, I ended up using GNU Parallel to split it up into 8 jobs to run across 8 cores.</p>
+<p>I split up my <code>individual_list_mutations.txt</code> into approximately 8 equal chunks into their files into <code>individual_list_mutations_{}.txt</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#75715e"># Split into 8 chunks</span>
+input_file <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;individual_list_mutations.txt&#34;</span>
+<span style="color:#66d9ef">with</span> open(input_file, <span style="color:#e6db74">&#34;r&#34;</span>) <span style="color:#66d9ef">as</span> file:
+    lines <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>readlines()
+
+total_lines <span style="color:#f92672">=</span> len(lines) <span style="color:#75715e"># Calculate the number of lines per chunk and the remainder (if any)</span>
+print(<span style="color:#e6db74">&#34;Read&#34;</span>, total_lines, <span style="color:#e6db74">&#34;lines&#34;</span>)
+
+num_chunks <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
+chunk_size <span style="color:#f92672">=</span> total_lines <span style="color:#f92672">//</span> num_chunks
+remainder <span style="color:#f92672">=</span> total_lines <span style="color:#f92672">%</span> num_chunks
+
+chunks <span style="color:#f92672">=</span> [] <span style="color:#75715e"># Split lines into chunks</span>
+start_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(num_chunks):
+    <span style="color:#75715e"># Distribute the remainder by adding 1 line to the first &#39;remainder&#39; chunks</span>
+    end_index <span style="color:#f92672">=</span> start_index <span style="color:#f92672">+</span> chunk_size <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> remainder <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>)
+    chunks<span style="color:#f92672">.</span>append(lines[start_index:end_index])
+    print(<span style="color:#e6db74">&#34;Got chunk&#34;</span>, str(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>), <span style="color:#e6db74">&#34;with lines&#34;</span>, start_index, <span style="color:#e6db74">&#34;to&#34;</span>, str(end_index <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>), <span style="color:#e6db74">&#34;, inclusive&#34;</span>)
+    start_index <span style="color:#f92672">=</span> end_index
+
+<span style="color:#75715e"># Write each chunk to a new file</span>
+<span style="color:#66d9ef">for</span> i, chunk <span style="color:#f92672">in</span> enumerate(chunks, <span style="color:#ae81ff">1</span>):
+    output_filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mutations_split/&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>input_file<span style="color:#f92672">.</span>rstrip(<span style="color:#e6db74">&#39;.txt&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">.txt&#34;</span>
+    <span style="color:#66d9ef">with</span> open(output_filename, <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#66d9ef">as</span> output_file:
+        output_file<span style="color:#f92672">.</span>writelines(chunk)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Created: </span><span style="color:#e6db74">{</span>output_filename<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+
+</code></pre></div><p>Using the <code>individual_list_mutations_{}.txt</code> files, I then used GNU Parallel on MSYS2 (Windows) to run 8 instances of FoldX. One neat thing I did was have it send me a message on Pushover when a job was done (which is free up to 10000 messages a month, or you can upgrade for a one-time fee of USD$5).</p>
+<p>Importantly, by default FoldX ignores water molecules (<code>--water=-IGNORE</code>), ascribes strong van der Waals forces, which requires a very precise crystal structure (<code>--vdwDesign=2</code>), and assumes an ion strength of 0.05 M(<code>--ionStrength=0.05</code>). So I made some tweaks to make it more applicable for my enzyme of interest.</p>
+<p>Let me know what you think!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+<span style="color:#75715e">#!/bin/bash</span>
+
+<span style="color:#75715e"># ---- Setup ----</span>
+
+cd <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>dirname <span style="color:#e6db74">&#34;</span>$0<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+
+njobs_parallel<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>
+TOKEN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;12345&#34;</span>
+USER<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;67890&#34;</span>
+TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;FoldX analysis progress&#34;</span>
+
+mkdir -p logs runs
+
+<span style="color:#75715e"># ---- Function to run each FoldX job ----</span>
+run_foldx_job<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  i<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+  ./foldx.exe <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --command<span style="color:#f92672">=</span>BuildModel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --pdb<span style="color:#f92672">=</span>8ruc-assembly-clean_Repair.pdb <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --mutant-file<span style="color:#f92672">=</span>individual_list_mutations_$1.txt <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --fix-residues-file<span style="color:#f92672">=</span>individual_list_constraints.txt <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --out-pdb<span style="color:#f92672">=</span>false <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --output-dir<span style="color:#f92672">=</span>runs <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --output-file<span style="color:#f92672">=</span>run_<span style="color:#e6db74">&#34;</span>$i<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --water<span style="color:#f92672">=</span>-CRYSTAL <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --vdwDesign<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --ionStrength<span style="color:#f92672">=</span>0.15 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --numberOfRuns<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    &gt; <span style="color:#e6db74">&#34;logs/foldx_run_</span><span style="color:#e6db74">${</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">.log&#34;</span> 2&gt;&amp;<span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  curl -s -F <span style="color:#e6db74">&#34;token=</span>$TOKEN<span style="color:#e6db74">&#34;</span> -F <span style="color:#e6db74">&#34;user=</span>$USER<span style="color:#e6db74">&#34;</span> -F <span style="color:#e6db74">&#34;title=</span>$TITLE<span style="color:#e6db74">&#34;</span> -F <span style="color:#e6db74">&#34;message=Run </span>$i<span style="color:#e6db74"> is done.&#34;</span> https://api.pushover.net/1/messages.json
+<span style="color:#f92672">}</span>
+export -f run_foldx_job
+
+<span style="color:#75715e"># ---- Run FoldX jobs in parallel ----</span>
+parallel --progress run_foldx_job ::: <span style="color:#66d9ef">$(</span>seq <span style="color:#ae81ff">1</span> $njobs_parallel<span style="color:#66d9ef">)</span>
+
+<span style="color:#75715e"># ---- Clean up ----</span>
+echo -e <span style="color:#e6db74">&#34;\n✅ All FoldX jobs are done!&#34;</span>
+read -p <span style="color:#e6db74">&#34;Press enter to exit.&#34;</span>
+</code></pre></div>
+</content>
+<p>
+  
+  <a href="https://example.com/blog/code/">#code</a>
+  
+  <a href="https://example.com/blog/science/">#science</a>
+  
+</p>
+
+  </main>
+  <footer>Made with <a href="https://github.com/janraasch/hugo-bearblog/">Hugo ʕ•ᴥ•ʔ Bear</a>
+</footer>
+
+    
+</body>
+
+</html>

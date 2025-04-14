@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>science on Arthur Leung</title>
+    <link>https://example.com/blog/science/</link>
+    <description>Recent content in science on Arthur Leung</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Arthur Leung.</copyright>
+    <lastBuildDate>Mon, 14 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/blog/science/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Parallelizing &#34;embarrassingly parallel&#34; bioinformatics jobs, e.g., FoldX</title>
+      <link>https://example.com/parallelizing-embarrassingly-parallel-bioinformatics-jobs-e.g.-foldx/</link>
+      <pubDate>Mon, 14 Apr 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/parallelizing-embarrassingly-parallel-bioinformatics-jobs-e.g.-foldx/</guid>
+      <description>In parallel computing, an embarrassingly parallel workload or problem (also called embarrassingly parallelizable, perfectly parallel, delightfully parallel or pleasingly parallel) is one where little or no effort is needed to split the problem into a number of parallel tasks. This is due to minimal or no dependency upon communication between the parallel tasks, or for results between them.
+ &amp;ndash;&amp;ldquo;Embarrassingly parallel&amp;rdquo; on Wikipedia
+One of FoldX&amp;rsquo;s functions is predicting the effect of a mutation on the stability of a protein crystal structure, as indexed by the change in free energy of folding (∆∆Gfold).</description>
+    </item>
+    
+    <item>
+      <title>NSERC PDF publication records</title>
+      <link>https://example.com/nserc-pdf-publication-records/</link>
+      <pubDate>Fri, 18 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/nserc-pdf-publication-records/</guid>
+      <description>Methods I downloaded publicly available names of researchers that received NSERC Postdoc Fellowships from 2020-2024. I manually looked them up on Google Scholar and used the &amp;ldquo;scholar&amp;rdquo; package to download a list of their publications. I then filtered for papers that were published during or before the year that they received the fellowship. I summed the number of publications.
+Additionally, using the order of the names, I also looked at how many first author publications they had.</description>
+    </item>
+    
+    <item>
+      <title>Intercellular airspace and plasmodesmata contact and diffusion</title>
+      <link>https://example.com/intercellular-airspace-and-plasmodesmata-contact-and-diffusion/</link>
+      <pubDate>Tue, 03 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/intercellular-airspace-and-plasmodesmata-contact-and-diffusion/</guid>
+      <description>I think it&amp;rsquo;s worth considering that less contact with intercellular airspace (IAS) means more contact to other cells.
+At a constant density of plasmodesmata, more area in contact between bundle sheath (BS) and mesophyll (M) cells means a greater total number of plasmodesmata between cells. This should increase the conductance of metabolites between BS and M cells, which should increase the efficiency of C2 and C4 photosynthesis.
+Conversely, a greater access of BS cells to air would increase the rate at which CO2 leaks out to the IAS.</description>
+    </item>
+    
+    <item>
+      <title>Reading multiple LI-6400 data files into a dataframe</title>
+      <link>https://example.com/reading-multiple-li-6400-data-files-into-a-dataframe/</link>
+      <pubDate>Sun, 23 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/reading-multiple-li-6400-data-files-into-a-dataframe/</guid>
+      <description>The LI-6400XT is the one of the most common gas exchange instruments for studying photosynthesis. However, the format of the files that it outputs is not so friendly with common methods for data analysis.
+It was time-consuming for me to do the following in Excel:
+ Take the columns of data that I&amp;rsquo;m interested in, e.g., the &amp;ldquo;Photo&amp;rdquo; column with CO2 assimilation rate values. Get rid of empty cells. The &amp;ldquo;Remark=&amp;rdquo; lines only have content in the first column, but adds empty cells for the rest of the row.</description>
+    </item>
+    
+    <item>
+      <title>Compact letter displays from the output of any statistical package</title>
+      <link>https://example.com/compact-letter-displays-from-the-output-of-any-statistical-package/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/compact-letter-displays-from-the-output-of-any-statistical-package/</guid>
+      <description>In my field, we are often interested in comparing central tendencies (e.g., means) between multiple discrete groups. Statistical tests like Tukey’s test can be useful, and assigning letters to statistical groups are commonly done according to the algorithm of Piepho (2004, Journal of Computational and Graphical Statistics). There are many options for running statistical tests, including base R functions, but when using tidyverse packages I prefer rstatix. However, there is no package that currently generates compact letter displays (CLD) from the outputs of the rstatix function.</description>
+    </item>
+    
+  </channel>
+</rss>

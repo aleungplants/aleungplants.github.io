@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>career on Arthur Leung</title>
+    <link>https://example.com/blog/career/</link>
+    <description>Recent content in career on Arthur Leung</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Arthur Leung.</copyright>
+    <lastBuildDate>Tue, 10 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/blog/career/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Update: NSERC PDF publication records</title>
+      <link>https://example.com/update-nserc-pdf-publication-records/</link>
+      <pubDate>Tue, 10 Dec 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/update-nserc-pdf-publication-records/</guid>
+      <description>Methods I downloaded publicly available names of researchers that received NSERC Postdoc Fellowships (PDFs) in the research subjects of Evolution and Ecology (Evo. &amp;amp; Eco.) and Plant and Tree Biology (Plant &amp;amp; Tree Bio.) from 1990-2023.
+Winners of the NSERC PDFs from 1990-2020 were available from the Awards Database, whereas winners from 2020-2023 were available on Competition Results pages.
+I looked them up on Google Scholar using the scholar::get_scholar_id() to get their Scholar ID.</description>
+    </item>
+    
+    <item>
+      <title>NSERC PDF publication records</title>
+      <link>https://example.com/nserc-pdf-publication-records/</link>
+      <pubDate>Fri, 18 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/nserc-pdf-publication-records/</guid>
+      <description>Methods I downloaded publicly available names of researchers that received NSERC Postdoc Fellowships from 2020-2024. I manually looked them up on Google Scholar and used the &amp;ldquo;scholar&amp;rdquo; package to download a list of their publications. I then filtered for papers that were published during or before the year that they received the fellowship. I summed the number of publications.
+Additionally, using the order of the names, I also looked at how many first author publications they had.</description>
+    </item>
+    
+  </channel>
+</rss>

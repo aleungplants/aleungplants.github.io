@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="https://example.com/images/favicon.png" />
+<title>Reading multiple LI-6400 data files into a dataframe | Arthur Leung</title>
+<meta name="title" content="Reading multiple LI-6400 data files into a dataframe" />
+<meta name="description" content="A case study of iterating over a list with purrr in R" />
+<meta name="keywords" content="code,science," />
+
+
+<meta property="og:title" content="Reading multiple LI-6400 data files into a dataframe" />
+<meta property="og:description" content="A case study of iterating over a list with purrr in R" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/reading-multiple-li-6400-data-files-into-a-dataframe/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-07-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-23T00:00:00+00:00" /><meta property="og:site_name" content="Arthur Leung" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Reading multiple LI-6400 data files into a dataframe"/>
+<meta name="twitter:description" content="A case study of iterating over a list with purrr in R"/>
+
+
+
+<meta itemprop="name" content="Reading multiple LI-6400 data files into a dataframe">
+<meta itemprop="description" content="A case study of iterating over a list with purrr in R"><meta itemprop="datePublished" content="2023-07-23T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-23T00:00:00+00:00" />
+<meta itemprop="wordCount" content="816">
+<meta itemprop="keywords" content="code,science," />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+  :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #fff;
+      --heading-color: #222;
+      --text-color: #444;
+      --link-color: #3273dc;
+      --visited-color:  #8b6fcb;
+      --code-background-color: #f2f2f2;
+      --code-color: #222;
+      --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      :root {
+          --background-color: #01242e;
+          --heading-color: #eee;
+          --text-color: #ddd;
+          --link-color: #8cc2dd;
+          --visited-color:  #8b6fcb;
+          --code-background-color: #000;
+          --code-color: #ddd;
+          --blockquote-color: #ccc;
+      }
+  }
+
+  body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+      color: var(--text-color);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+  }
+
+  a {
+      color: var(--link-color);
+      cursor: pointer;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  nav a {
+      margin-right: 8px;
+  }
+
+  strong, b {
+      color: var(--heading-color);
+  }
+
+  button {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  time {
+   	font-family: monospace;
+    	font-style: normal;
+    	font-size: 15px;
+  }
+
+  main {
+      line-height: 1.6;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  hr {
+      border: 0;
+      border-top: 1px dashed;
+  }
+
+  img {
+      max-width: 100%;
+  }
+
+  code {
+      font-family: monospace;
+      padding: 2px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+  }
+
+  blockquote {
+      border-left: 1px solid #999;
+      color: var(--code-color);
+      padding-left: 20px;
+      font-style: italic;
+  }
+
+  footer {
+      padding: 25px 0;
+      text-align: center;
+  }
+
+  .title:hover {
+      text-decoration: none;
+  }
+
+  .title h1 {
+      font-size: 1.5em;
+  }
+
+  .inline {
+      width: auto !important;
+  }
+
+  .highlight, .code {
+      padding: 1px 15px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+  }
+
+  ul.blog-posts li {
+      display: flex;
+  }
+
+  ul.blog-posts li span {
+      flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+      color: var(--visited-color);
+  }
+</style>
+
+</head>
+
+<body>
+  <header><a href="/" class="title">
+  <h2>Arthur Leung</h2>
+</a>
+<nav><a href="/">Home</a>
+
+
+<a href="/blog">Blog</a>
+
+</nav>
+</header>
+  <main>
+
+<h1>Reading multiple LI-6400 data files into a dataframe</h1>
+<p>
+  <i>
+    <time datetime='2023-07-23'>
+      23 Jul, 2023
+    </time>
+  </i>
+</p>
+
+<content>
+  <p>The LI-6400XT is the one of the most common gas exchange instruments for studying photosynthesis. However, the format of the files that it outputs is not so friendly with common methods for data analysis.</p>
+<p>It was time-consuming for me to do the following in Excel:</p>
+<ol>
+<li>Take the columns of data that I&rsquo;m interested in, e.g., the &ldquo;Photo&rdquo; column with CO<sub>2</sub> assimilation rate values.</li>
+<li>Get rid of empty cells. The &ldquo;Remark=&rdquo; lines only have content in the first column, but adds empty cells for the rest of the row.</li>
+<li>Merge data from multiple files together.</li>
+</ol>
+<p>If you are reading this it is probably because I shared this with you. So you know what I&rsquo;m talking about.</p>
+<p>For my script, you have to open raw .xls files and save it as .xlsx, because <code>readxl</code> doesn&rsquo;t seem to be able to read the .xls ouputted by the LI-6400. Otherwise, I would just directly load the .xls files with the script.</p>
+<p>I used <code>here::here()</code> to get the filepath to the location of the R script as a string (the directory in which the script is located). Arguments in this functions get appended to the path. This is useful because it works on macOS and Windows, and it allows the script to be portable. According to the developers of the package, it works better than setting a working directory.</p>
+<p>I defined a function called <code>read_licor()</code>, which takes the path of the .xlsx file from a LI-6400 you want to read and outputs a dataframe with all the columns in the file.</p>
+<ul>
+<li>I removed the first 8 lines of the Li-Cor file with <code>skip = 8</code>. Those lines have metadata that isn&rsquo;t needed for most data analyses. The following row would then be the names of the columns which turn into the variables in the dataframe.</li>
+<li><code>dplyr::slice(-1)</code> then removes the first line in that dataframe, which is a bunch of &ldquo;in&rdquo; and &ldquo;out&rdquo; strings.</li>
+<li>I got used <code>dplyr::filter()</code> to get rid of lines with &ldquo;Remark=&rdquo; in the Obs column. I don&rsquo;t use this function in the LI-6400, but you can keep this if you want them. Perhaps <code>dplyr::filter()</code> these lines into a separate dataframe. Then you can <code>stringr::word(Obs, 2, sep = fixed('='))</code> on those lines.</li>
+<li>I did a check for typos in the leaf area. Mistakes happen when you have to manually type and copy/paste leaf areas.</li>
+<li>I add a new variable called Filename. I personally put important information like the species and plant ID in the name of the data file when taking measurements, which allows me to discern where the data came from. It is not hard to manipulate the filename string to get the important information, e.g. with <code>strsplit()</code>, <code>dplyr::mutate()</code>, <code>stringr::word()</code>, etc.</li>
+</ul>
+<p>The key function is <code>purrr::map_dfr</code>, which allows you to loop through a list and, in each iteration, run a function with the list item as an argument. It then binds the output of each run of the function.
+Using <code>dplyr::select()</code>, the columns of interest are selected to include in the final .csv output.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">
+<span style="color:#a6e22e">library</span>(dplyr)
+
+<span style="color:#75715e"># SET WORKING DIRECTORY and CHOOSE COLUMNS OF INTEREST</span>
+
+RUN_TEST <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">TRUE</span> <span style="color:#75715e"># Running a test on one file can save time, in case there are errors with the function</span>
+TEST_NAME <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;2023-08-14 CO K. daig 24H_ leaf area.xlsx&#34;</span>
+COLUMNS <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Filename&#34;</span>, <span style="color:#e6db74">&#34;Obs&#34;</span>, <span style="color:#e6db74">&#34;Photo&#34;</span>, <span style="color:#e6db74">&#34;Ci&#34;</span>, <span style="color:#e6db74">&#34;Cond&#34;</span>, <span style="color:#e6db74">&#34;vp_kPa&#34;</span>)
+OUTPUT_NAME <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;merged_licor.csv&#34;</span>
+
+<span style="color:#75715e"># DEFINE FUNCTION</span>
+<span style="color:#75715e"># Takes the path of the .xlsx file from a LI-6400 you want to read, outputs a dataframe with all the columns in the file.</span>
+read_licor <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(infile) {
+  <span style="color:#75715e"># Read .xlsx file</span>
+  dataframe <span style="color:#f92672">&lt;-</span> readxl<span style="color:#f92672">::</span><span style="color:#a6e22e">read_xlsx</span>(infile, skip <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>) <span style="color:#f92672">%&gt;%</span> <span style="color:#75715e"># skip the first 8 metadata lines</span>
+    dplyr<span style="color:#f92672">::</span><span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">-1</span>) <span style="color:#f92672">%&gt;%</span> <span style="color:#75715e"># remove first row of &#34;in&#34; and &#34;out&#34;</span>
+    dplyr<span style="color:#f92672">::</span><span style="color:#a6e22e">filter</span>(Obs <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;Remark=&#34;</span>) <span style="color:#75715e"># remove rows with &#34;Remark=&#34;</span>
+  <span style="color:#75715e"># Check leaf areas for mistakes</span>
+  areas <span style="color:#f92672">&lt;-</span> dataframe <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">select</span>(Area) <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">distinct</span>()
+  <span style="color:#a6e22e">if </span>(<span style="color:#a6e22e">length</span>(areas) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) {
+    <span style="color:#a6e22e">print</span>(<span style="color:#a6e22e">paste</span>(filename,<span style="color:#e6db74">&#34;has more than one unique leaf area.&#34;</span>))} <span style="color:#75715e"># If you had a typo somewhere it would show up as a unique leaf area</span>
+  <span style="color:#a6e22e">if </span>(<span style="color:#ae81ff">2.5</span> <span style="color:#f92672">%in%</span> areas) {
+    <span style="color:#a6e22e">print</span>(<span style="color:#e6db74">&#34;Leaf area is 2.5, did you enter the right leaf area?&#34;</span>) <span style="color:#75715e"># The default leaf area for our LI-6400 is 2.5, so if you didn&#39;t change the leaf area it would tell you</span>
+  }
+  <span style="color:#75715e"># Add column with filename</span>
+  dataframe <span style="color:#f92672">&lt;-</span> dataframe <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">mutate</span>(Filename <span style="color:#f92672">=</span> infile)
+  <span style="color:#75715e"># Return</span>
+  <span style="color:#a6e22e">return</span>(dataframe)
+}
+
+<span style="color:#75715e"># OPTIONAL TEST ON ONE FILE</span>
+<span style="color:#a6e22e">if </span>(RUN_TEST <span style="color:#f92672">==</span> <span style="color:#66d9ef">TRUE</span>) {
+  test <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read_licor</span>(TEST_NAME)
+  test
+}
+
+<span style="color:#75715e"># GET FILE LIST IN THE WORKING DIRECTORY, RUN OUR FUNCTION ON EACH FILE, AND MERGE THE OUTPUTS.</span>
+file_list <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list.files</span>(<span style="color:#a6e22e">paste</span>(here<span style="color:#f92672">::</span><span style="color:#a6e22e">here</span>(), sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>), pattern<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;\\.xlsx&#34;</span>) <span style="color:#75715e"># Gets a list of files in the working directory</span>
+merged <span style="color:#f92672">&lt;-</span> purrr<span style="color:#f92672">::</span><span style="color:#a6e22e">map_dfr</span>(file_list, <span style="color:#f92672">~</span> <span style="color:#a6e22e">read_licor</span>(.)) <span style="color:#f92672">%&gt;%</span> <span style="color:#75715e"># Runs the function on all the files and merges them by row (stack on top of each other) using map_dfr</span>
+  dplyr<span style="color:#f92672">::</span><span style="color:#a6e22e">select</span>(<span style="color:#a6e22e">all_of</span>(COLUMNS)) <span style="color:#75715e"># select allows you to choose the columns you want</span>
+
+<span style="color:#75715e"># WRITE TO CSV FILE</span>
+<span style="color:#a6e22e">write.csv</span>(merged,
+          here<span style="color:#f92672">::</span><span style="color:#a6e22e">here</span>(OUTPUT_NAME),
+          row.names <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>)
+
+</code></pre></div>
+</content>
+<p>
+  
+  <a href="https://example.com/blog/code/">#code</a>
+  
+  <a href="https://example.com/blog/science/">#science</a>
+  
+</p>
+
+  </main>
+  <footer>Made with <a href="https://github.com/janraasch/hugo-bearblog/">Hugo ʕ•ᴥ•ʔ Bear</a>
+</footer>
+
+    
+</body>
+
+</html>

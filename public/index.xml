@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Arthur Leung</title>
+    <link>https://example.com/</link>
+    <description>Recent content on Arthur Leung</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2025, Arthur Leung.</copyright>
+    <lastBuildDate>Mon, 14 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Parallelizing &#34;embarrassingly parallel&#34; bioinformatics jobs, e.g., FoldX</title>
+      <link>https://example.com/parallelizing-embarrassingly-parallel-bioinformatics-jobs-e.g.-foldx/</link>
+      <pubDate>Mon, 14 Apr 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/parallelizing-embarrassingly-parallel-bioinformatics-jobs-e.g.-foldx/</guid>
+      <description>In parallel computing, an embarrassingly parallel workload or problem (also called embarrassingly parallelizable, perfectly parallel, delightfully parallel or pleasingly parallel) is one where little or no effort is needed to split the problem into a number of parallel tasks. This is due to minimal or no dependency upon communication between the parallel tasks, or for results between them.
+ &amp;ndash;&amp;ldquo;Embarrassingly parallel&amp;rdquo; on Wikipedia
+One of FoldX&amp;rsquo;s functions is predicting the effect of a mutation on the stability of a protein crystal structure, as indexed by the change in free energy of folding (∆∆Gfold).</description>
+    </item>
+    
+    <item>
+      <title>Update: NSERC PDF publication records</title>
+      <link>https://example.com/update-nserc-pdf-publication-records/</link>
+      <pubDate>Tue, 10 Dec 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/update-nserc-pdf-publication-records/</guid>
+      <description>Methods I downloaded publicly available names of researchers that received NSERC Postdoc Fellowships (PDFs) in the research subjects of Evolution and Ecology (Evo. &amp;amp; Eco.) and Plant and Tree Biology (Plant &amp;amp; Tree Bio.) from 1990-2023.
+Winners of the NSERC PDFs from 1990-2020 were available from the Awards Database, whereas winners from 2020-2023 were available on Competition Results pages.
+I looked them up on Google Scholar using the scholar::get_scholar_id() to get their Scholar ID.</description>
+    </item>
+    
+    <item>
+      <title>NSERC PDF publication records</title>
+      <link>https://example.com/nserc-pdf-publication-records/</link>
+      <pubDate>Fri, 18 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/nserc-pdf-publication-records/</guid>
+      <description>Methods I downloaded publicly available names of researchers that received NSERC Postdoc Fellowships from 2020-2024. I manually looked them up on Google Scholar and used the &amp;ldquo;scholar&amp;rdquo; package to download a list of their publications. I then filtered for papers that were published during or before the year that they received the fellowship. I summed the number of publications.
+Additionally, using the order of the names, I also looked at how many first author publications they had.</description>
+    </item>
+    
+    <item>
+      <title>Intercellular airspace and plasmodesmata contact and diffusion</title>
+      <link>https://example.com/intercellular-airspace-and-plasmodesmata-contact-and-diffusion/</link>
+      <pubDate>Tue, 03 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/intercellular-airspace-and-plasmodesmata-contact-and-diffusion/</guid>
+      <description>I think it&amp;rsquo;s worth considering that less contact with intercellular airspace (IAS) means more contact to other cells.
+At a constant density of plasmodesmata, more area in contact between bundle sheath (BS) and mesophyll (M) cells means a greater total number of plasmodesmata between cells. This should increase the conductance of metabolites between BS and M cells, which should increase the efficiency of C2 and C4 photosynthesis.
+Conversely, a greater access of BS cells to air would increase the rate at which CO2 leaks out to the IAS.</description>
+    </item>
+    
+    <item>
+      <title>between(x, left, right) is the same as x &gt;= left &amp; x &lt;= right</title>
+      <link>https://example.com/betweenx-left-right-is-the-same-as-x-left-x-right/</link>
+      <pubDate>Mon, 05 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/betweenx-left-right-is-the-same-as-x-left-x-right/</guid>
+      <description>between(x, left, right) is the same as x &amp;gt;= left &amp;amp; x &amp;lt;= right, which means you can use it to filter for specific parts of your data! For instance, for my Ci* A-Ci data, I need to filter for just the initial slopes of each A-Ci response measured at a different PAR.
+cstar_aci_data &amp;lt;- aci_data %&amp;gt;% filter(Obs %&amp;gt;% between(4, 8) | Obs %&amp;gt;% between(20, 25) | Obs %&amp;gt;% between(29, 34) | Obs %&amp;gt;% between(38, 43) | Obs %&amp;gt;% between(47, 52)) </description>
+    </item>
+    
+    <item>
+      <title>You should use theme_set() in addition to theme() in ggplot</title>
+      <link>https://example.com/you-should-use-theme_set-in-addition-to-theme-in-ggplot/</link>
+      <pubDate>Tue, 21 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/you-should-use-theme_set-in-addition-to-theme-in-ggplot/</guid>
+      <description>theme_set() takes theme objects as its argument, and it will apply it to all subsequent ggplots. For example, you can do theme_set(theme_bw()) and it&amp;rsquo;ll apply theme_bw() to all your ggplots. I personally like cowplot::theme_cowplot() as a starting theme to modify.
+You can also use ggplot-style addition to add multiple theme objects (and theme_set() will apply them all to the ggplots.
+Helpful for consistency across all your figures - no more copy and pasting theme()s.</description>
+    </item>
+    
+    <item>
+      <title>here() as an alternative to using working directories in R</title>
+      <link>https://example.com/here-as-an-alternative-to-using-working-directories-in-r/</link>
+      <pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/here-as-an-alternative-to-using-working-directories-in-r/</guid>
+      <description>I have a Windows desktop and a macOS laptop. I share files between them using OneDrive, provided by my institution. The root directory of OneDrive on my laptop is /Users/art/Library/CloudStorage/OneDrive, but on my desktop it&amp;rsquo;s C:/OneDrive. Without having to edit the working directory of my R scripts, how can I switch between the two devices while working on the same script? Or if I am to send an R script to a colleague, how do I ensure it will work regardless of where they put the script?</description>
+    </item>
+    
+    <item>
+      <title>Reading multiple LI-6400 data files into a dataframe</title>
+      <link>https://example.com/reading-multiple-li-6400-data-files-into-a-dataframe/</link>
+      <pubDate>Sun, 23 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/reading-multiple-li-6400-data-files-into-a-dataframe/</guid>
+      <description>The LI-6400XT is the one of the most common gas exchange instruments for studying photosynthesis. However, the format of the files that it outputs is not so friendly with common methods for data analysis.
+It was time-consuming for me to do the following in Excel:
+ Take the columns of data that I&amp;rsquo;m interested in, e.g., the &amp;ldquo;Photo&amp;rdquo; column with CO2 assimilation rate values. Get rid of empty cells. The &amp;ldquo;Remark=&amp;rdquo; lines only have content in the first column, but adds empty cells for the rest of the row.</description>
+    </item>
+    
+    <item>
+      <title>Compact letter displays from the output of any statistical package</title>
+      <link>https://example.com/compact-letter-displays-from-the-output-of-any-statistical-package/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/compact-letter-displays-from-the-output-of-any-statistical-package/</guid>
+      <description>In my field, we are often interested in comparing central tendencies (e.g., means) between multiple discrete groups. Statistical tests like Tukey’s test can be useful, and assigning letters to statistical groups are commonly done according to the algorithm of Piepho (2004, Journal of Computational and Graphical Statistics). There are many options for running statistical tests, including base R functions, but when using tidyverse packages I prefer rstatix. However, there is no package that currently generates compact letter displays (CLD) from the outputs of the rstatix function.</description>
+    </item>
+    
+    <item>
+      <title>Summarising your data in R with across()</title>
+      <link>https://example.com/summarising-your-data-in-r-with-across/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/summarising-your-data-in-r-with-across/</guid>
+      <description>Just want to highlight something I learned from the dplyr R package that has saved me a lot of copy-and-paste coding!
+Problem dplyr is useful because I can use the group_by() function to group a dataframe by a specific column, then use summarise() (or mutate(), see below) to iterate each of those groupings to perform specific functions.
+For instance, with Sepal.Length in iris:
+# I have already loaded dplyr with library(dplyr) head() ## Sepal.</description>
+    </item>
+    
+    <item>
+      <title>Redirect a doi to off-campus access URL with a browser extension</title>
+      <link>https://example.com/redirect-a-doi-to-off-campus-access-url-with-a-browser-extension/</link>
+      <pubDate>Tue, 09 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/redirect-a-doi-to-off-campus-access-url-with-a-browser-extension/</guid>
+      <description>When I&amp;rsquo;m off-campus, my browser never remembers that it was logged into my university account, so I have to go to the library website and log in there.
+I have been using Redirector (github), a browser extension that allows redirecting of URLs that match a specific pattern to another URL of your choice.
+So whenever I can&amp;rsquo;t get a paper because I&amp;rsquo;m off campus, I just click the doi link and the browser extension will redirect me to a URL with the off-campus access URL appended to the front, which will either let me log in or take me straight to the paper.</description>
+    </item>
+    
+  </channel>
+</rss>

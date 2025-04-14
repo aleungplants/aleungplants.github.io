@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="https://example.com/images/favicon.png" />
+<title>Compact letter displays from the output of any statistical package | Arthur Leung</title>
+<meta name="title" content="Compact letter displays from the output of any statistical package" />
+<meta name="description" content="Sharing my script" />
+<meta name="keywords" content="code,science," />
+
+
+<meta property="og:title" content="Compact letter displays from the output of any statistical package" />
+<meta property="og:description" content="Sharing my script" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/compact-letter-displays-from-the-output-of-any-statistical-package/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-07-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-07-06T00:00:00+00:00" /><meta property="og:site_name" content="Arthur Leung" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Compact letter displays from the output of any statistical package"/>
+<meta name="twitter:description" content="Sharing my script"/>
+
+
+
+<meta itemprop="name" content="Compact letter displays from the output of any statistical package">
+<meta itemprop="description" content="Sharing my script"><meta itemprop="datePublished" content="2023-07-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-07-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="446">
+<meta itemprop="keywords" content="code,science," />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+  :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #fff;
+      --heading-color: #222;
+      --text-color: #444;
+      --link-color: #3273dc;
+      --visited-color:  #8b6fcb;
+      --code-background-color: #f2f2f2;
+      --code-color: #222;
+      --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      :root {
+          --background-color: #01242e;
+          --heading-color: #eee;
+          --text-color: #ddd;
+          --link-color: #8cc2dd;
+          --visited-color:  #8b6fcb;
+          --code-background-color: #000;
+          --code-color: #ddd;
+          --blockquote-color: #ccc;
+      }
+  }
+
+  body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+      color: var(--text-color);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+  }
+
+  a {
+      color: var(--link-color);
+      cursor: pointer;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  nav a {
+      margin-right: 8px;
+  }
+
+  strong, b {
+      color: var(--heading-color);
+  }
+
+  button {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  time {
+   	font-family: monospace;
+    	font-style: normal;
+    	font-size: 15px;
+  }
+
+  main {
+      line-height: 1.6;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  hr {
+      border: 0;
+      border-top: 1px dashed;
+  }
+
+  img {
+      max-width: 100%;
+  }
+
+  code {
+      font-family: monospace;
+      padding: 2px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+  }
+
+  blockquote {
+      border-left: 1px solid #999;
+      color: var(--code-color);
+      padding-left: 20px;
+      font-style: italic;
+  }
+
+  footer {
+      padding: 25px 0;
+      text-align: center;
+  }
+
+  .title:hover {
+      text-decoration: none;
+  }
+
+  .title h1 {
+      font-size: 1.5em;
+  }
+
+  .inline {
+      width: auto !important;
+  }
+
+  .highlight, .code {
+      padding: 1px 15px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+  }
+
+  ul.blog-posts li {
+      display: flex;
+  }
+
+  ul.blog-posts li span {
+      flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+      color: var(--visited-color);
+  }
+</style>
+
+</head>
+
+<body>
+  <header><a href="/" class="title">
+  <h2>Arthur Leung</h2>
+</a>
+<nav><a href="/">Home</a>
+
+
+<a href="/blog">Blog</a>
+
+</nav>
+</header>
+  <main>
+
+<h1>Compact letter displays from the output of any statistical package</h1>
+<p>
+  <i>
+    <time datetime='2023-07-06'>
+      06 Jul, 2023
+    </time>
+  </i>
+</p>
+
+<content>
+  <p>In my field, we are often interested in comparing central tendencies (e.g., means) between multiple discrete groups. Statistical tests like Tukey’s test can be useful, and assigning letters to statistical groups are commonly done according to the algorithm of Piepho (2004, <em>Journal of Computational and Graphical Statistics</em>). There are many options for running statistical tests, including base R functions, but when using tidyverse packages I prefer rstatix. However, there is no package that currently generates compact letter displays (CLD) from the outputs of the rstatix function. It turns out that it is not that difficult, if we use the functions already available for getting CLDs from base R functions (<code>multcompView::multcompLetters()</code>). Below code works for rstatix, but theoretically this function can work with any matrix of p-values (e.g., from <code>phytools::phylANOVA</code>), as long as we put it in a named list format.</p>
+<p>We load dplyr.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(dplyr)
+
+    <span style="color:#75715e">##</span>
+    <span style="color:#75715e">## Attaching package: &#39;dplyr&#39;</span>
+
+    <span style="color:#75715e">## The following objects are masked from &#39;package:stats&#39;:</span>
+    <span style="color:#75715e">##</span>
+    <span style="color:#75715e">##     filter, lag</span>
+
+    <span style="color:#75715e">## The following objects are masked from &#39;package:base&#39;:</span>
+    <span style="color:#75715e">##</span>
+    <span style="color:#75715e">##     intersect, setdiff, setequal, union</span>
+</code></pre></div><p>Quick look at the dataset.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">head</span>(iris)
+
+    <span style="color:#75715e">##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
+    <span style="color:#75715e">## 1          5.1         3.5          1.4         0.2  setosa</span>
+    <span style="color:#75715e">## 2          4.9         3.0          1.4         0.2  setosa</span>
+    <span style="color:#75715e">## 3          4.7         3.2          1.3         0.2  setosa</span>
+    <span style="color:#75715e">## 4          4.6         3.1          1.5         0.2  setosa</span>
+    <span style="color:#75715e">## 5          5.0         3.6          1.4         0.2  setosa</span>
+    <span style="color:#75715e">## 6          5.4         3.9          1.7         0.4  setosa</span>
+</code></pre></div><p>Use <code>rstatix</code> to run a statistical test.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">test <span style="color:#f92672">&lt;-</span> iris <span style="color:#f92672">%&gt;%</span> rstatix<span style="color:#f92672">::</span><span style="color:#a6e22e">tukey_hsd</span>(Sepal.Length <span style="color:#f92672">~</span> Species)
+test
+
+    <span style="color:#75715e">## # A tibble: 3 × 9</span>
+    <span style="color:#75715e">##   term    group1     group2     null.value estimate conf.low conf.high    p.adj</span>
+    <span style="color:#75715e">## * &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
+    <span style="color:#75715e">## 1 Species setosa     versicolor          0    0.93     0.686     1.17  3.39e-14</span>
+    <span style="color:#75715e">## 2 Species setosa     virginica           0    1.58     1.34      1.83  3   e-15</span>
+    <span style="color:#75715e">## 3 Species versicolor virginica           0    0.652    0.408     0.896 8.29e- 9</span>
+    <span style="color:#75715e">## # ℹ 1 more variable: p.adj.signif &lt;chr&gt;</span>
+</code></pre></div><p>You need a named list with hyphenated groups as names and p-values as
+values.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">p_values <span style="color:#f92672">&lt;-</span> test <span style="color:#f92672">%&gt;%</span> dplyr<span style="color:#f92672">::</span><span style="color:#a6e22e">mutate</span>(groups <span style="color:#f92672">=</span> stringr<span style="color:#f92672">::</span><span style="color:#a6e22e">str_c</span>(group1, group2, sep <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-&#34;</span>)) <span style="color:#f92672">%&gt;%</span> <span style="color:#75715e"># concatenate group1 and group2 with hyphen</span>
+  dplyr<span style="color:#f92672">::</span><span style="color:#a6e22e">select</span>(groups, p.adj) <span style="color:#f92672">%&gt;%</span> <span style="color:#75715e"># get just the groups and p values</span>
+  tibble<span style="color:#f92672">::</span><span style="color:#a6e22e">deframe</span>() <span style="color:#75715e"># turn into named list</span>
+p_values
+
+    <span style="color:#75715e">##    setosa-versicolor     setosa-virginica versicolor-virginica</span>
+    <span style="color:#75715e">##             3.39e-14             3.00e-15             8.29e-09</span>
+</code></pre></div><p>Get letters, then clean up the dataframe.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#66d9ef">letters</span> <span style="color:#f92672">&lt;-</span> multcompView<span style="color:#f92672">::</span><span style="color:#a6e22e">multcompLetters</span>(p_values)<span style="color:#f92672">$</span>Letters
+<span style="color:#66d9ef">letters</span>
+
+    <span style="color:#75715e">##     setosa versicolor  virginica</span>
+    <span style="color:#75715e">##        &#34;a&#34;        &#34;b&#34;        &#34;c&#34;</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#66d9ef">letters</span> <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">letters</span> <span style="color:#f92672">%&gt;%</span> <span style="color:#75715e"># outputs a named list tibble::as_tibble(rownames = &#34;group&#34;) %&gt;% # turn into tibble, keeping rownames</span>
+  tibble<span style="color:#f92672">::</span><span style="color:#a6e22e">as_tibble</span>(rownames <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;group&#34;</span>) <span style="color:#f92672">%&gt;%</span>
+  dplyr<span style="color:#f92672">::</span><span style="color:#a6e22e">rename</span>(letter <span style="color:#f92672">=</span> value) <span style="color:#75715e"># give a more meaningful name</span>
+<span style="color:#66d9ef">letters</span>
+
+    <span style="color:#75715e">## # A tibble: 3 × 2</span>
+    <span style="color:#75715e">##   group      letter</span>
+    <span style="color:#75715e">##   &lt;chr&gt;      &lt;chr&gt;</span>
+    <span style="color:#75715e">## 1 setosa     a     </span>
+    <span style="color:#75715e">## 2 versicolor b     </span>
+    <span style="color:#75715e">## 3 virginica  c</span>
+</code></pre></div>
+</content>
+<p>
+  
+  <a href="https://example.com/blog/code/">#code</a>
+  
+  <a href="https://example.com/blog/science/">#science</a>
+  
+</p>
+
+  </main>
+  <footer>Made with <a href="https://github.com/janraasch/hugo-bearblog/">Hugo ʕ•ᴥ•ʔ Bear</a>
+</footer>
+
+    
+</body>
+
+</html>

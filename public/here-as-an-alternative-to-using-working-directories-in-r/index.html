@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="https://example.com/images/favicon.png" />
+<title>here() as an alternative to using working directories in R | Arthur Leung</title>
+<meta name="title" content="here() as an alternative to using working directories in R" />
+<meta name="description" content="A function I found recently" />
+<meta name="keywords" content="code," />
+
+
+<meta property="og:title" content="here() as an alternative to using working directories in R" />
+<meta property="og:description" content="A function I found recently" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://example.com/here-as-an-alternative-to-using-working-directories-in-r/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-09-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-18T00:00:00+00:00" /><meta property="og:site_name" content="Arthur Leung" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="here() as an alternative to using working directories in R"/>
+<meta name="twitter:description" content="A function I found recently"/>
+
+
+
+<meta itemprop="name" content="here() as an alternative to using working directories in R">
+<meta itemprop="description" content="A function I found recently"><meta itemprop="datePublished" content="2023-09-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2023-09-18T00:00:00+00:00" />
+<meta itemprop="wordCount" content="457">
+<meta itemprop="keywords" content="code," />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  <style>
+  :root {
+      --width: 720px;
+      --font-main: Verdana, sans-serif;
+      --font-secondary: Verdana, sans-serif;
+      --font-scale: 1em;
+      --background-color: #fff;
+      --heading-color: #222;
+      --text-color: #444;
+      --link-color: #3273dc;
+      --visited-color:  #8b6fcb;
+      --code-background-color: #f2f2f2;
+      --code-color: #222;
+      --blockquote-color: #222;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      :root {
+          --background-color: #01242e;
+          --heading-color: #eee;
+          --text-color: #ddd;
+          --link-color: #8cc2dd;
+          --visited-color:  #8b6fcb;
+          --code-background-color: #000;
+          --code-color: #ddd;
+          --blockquote-color: #ccc;
+      }
+  }
+
+  body {
+      font-family: var(--font-secondary);
+      font-size: var(--font-scale);
+      margin: auto;
+      padding: 20px;
+      max-width: var(--width);
+      text-align: left;
+      background-color: var(--background-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.5;
+      color: var(--text-color);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--heading-color);
+  }
+
+  a {
+      color: var(--link-color);
+      cursor: pointer;
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: underline;
+  }
+
+  nav a {
+      margin-right: 8px;
+  }
+
+  strong, b {
+      color: var(--heading-color);
+  }
+
+  button {
+      margin: 0;
+      cursor: pointer;
+  }
+
+  time {
+   	font-family: monospace;
+    	font-style: normal;
+    	font-size: 15px;
+  }
+
+  main {
+      line-height: 1.6;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  hr {
+      border: 0;
+      border-top: 1px dashed;
+  }
+
+  img {
+      max-width: 100%;
+  }
+
+  code {
+      font-family: monospace;
+      padding: 2px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+  }
+
+  blockquote {
+      border-left: 1px solid #999;
+      color: var(--code-color);
+      padding-left: 20px;
+      font-style: italic;
+  }
+
+  footer {
+      padding: 25px 0;
+      text-align: center;
+  }
+
+  .title:hover {
+      text-decoration: none;
+  }
+
+  .title h1 {
+      font-size: 1.5em;
+  }
+
+  .inline {
+      width: auto !important;
+  }
+
+  .highlight, .code {
+      padding: 1px 15px;
+      background-color: var(--code-background-color);
+      color: var(--code-color);
+      border-radius: 3px;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      overflow-x: auto;
+  }
+
+   
+  ul.blog-posts {
+      list-style-type: none;
+      padding: unset;
+  }
+
+  ul.blog-posts li {
+      display: flex;
+  }
+
+  ul.blog-posts li span {
+      flex: 0 0 130px;
+  }
+
+  ul.blog-posts li a:visited {
+      color: var(--visited-color);
+  }
+</style>
+
+</head>
+
+<body>
+  <header><a href="/" class="title">
+  <h2>Arthur Leung</h2>
+</a>
+<nav><a href="/">Home</a>
+
+
+<a href="/blog">Blog</a>
+
+</nav>
+</header>
+  <main>
+
+<h1>here() as an alternative to using working directories in R</h1>
+<p>
+  <i>
+    <time datetime='2023-09-18'>
+      18 Sep, 2023
+    </time>
+  </i>
+</p>
+
+<content>
+  <p>I have a Windows desktop and a macOS laptop. I share files between them using OneDrive, provided by my institution. The root directory of OneDrive on my laptop is <code>/Users/art/Library/CloudStorage/OneDrive</code>, but on my desktop it&rsquo;s <code>C:/OneDrive</code>. Without having to edit the working directory of my R scripts, how can I switch between the two devices while working on the same script? Or if I am to send an R script to a colleague, how do I ensure it will work regardless of where they put the script?</p>
+<h2 id="here-package-in-r"><code>here</code> package in R</h2>
+<p>This package makes it easy to work with filepaths relative to the script or a pre-defined project folder.</p>
+<p>If you run <code>here()</code>, it will return the directory in which your file is located.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">here<span style="color:#f92672">::</span><span style="color:#a6e22e">here</span>()
+
+<span style="color:#75715e">## [1] &#34;/Users/art/Documents/Project/Scripts&#34;</span>
+</code></pre></div><p>String arguments within <code>here()</code> will append those strings to that filepath, separated by <code>/</code> if there are multiple strings (whether or not they exist).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">here<span style="color:#f92672">::</span><span style="color:#a6e22e">here</span>(<span style="color:#e6db74">&#34;Folder&#34;</span>)
+<span style="color:#75715e">## [1] &#34;/Users/art/Documents/Project/Scripts/Folder&#34;</span>
+
+here<span style="color:#f92672">::</span><span style="color:#a6e22e">here</span>(<span style="color:#e6db74">&#34;Folder&#34;</span>, <span style="color:#e6db74">&#34;File.txt&#34;</span>)
+<span style="color:#75715e">## [1] &#34;/Users/art/Documents/Project/Scripts/Folder/File.txt&#34;</span>
+
+here<span style="color:#f92672">::</span><span style="color:#a6e22e">here</span>(<span style="color:#e6db74">&#34;Folder/File2.txt&#34;</span>)
+<span style="color:#75715e">## [1] &#34;/Users/art/Documents/Project/Scripts/Folder/File2.txt&#34;</span>
+</code></pre></div><p>This will work if I moved this &ldquo;Scripts&rdquo; folder (which contains this R Markdown document).</p>
+<p>But let&rsquo;s say we have a file in <code>Project/Data</code> that we want to access. (Without doing anything else, <code>here()</code> only allows us to work within the <code>Scripts</code> folder.) We can use <code>i_am()</code> from the <code>here</code> package to define a project folder; this kind of like a working directory, but it is <em>relative</em> to the file you are working in. It takes a string that is the filepath relative to your desired project folder.</p>
+<p>Here are a few examples, first for illustration defining <code>Documents</code> as the project folder, then defining <code>Project</code> as the project folder.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">here<span style="color:#f92672">::</span><span style="color:#a6e22e">i_am</span>(<span style="color:#e6db74">&#34;Project/Scripts/here.Rmd&#34;</span>)
+<span style="color:#75715e">## here() starts at /Users/art/Documents</span>
+
+here<span style="color:#f92672">::</span><span style="color:#a6e22e">here</span>(<span style="color:#e6db74">&#34;Data&#34;</span>)
+<span style="color:#75715e">## [1] &#34;/Users/art/Documents/Data&#34;</span>
+
+here<span style="color:#f92672">::</span><span style="color:#a6e22e">i_am</span>(<span style="color:#e6db74">&#34;Scripts/here.Rmd&#34;</span>)
+<span style="color:#75715e">## here() starts at /Users/art/Documents/Project</span>
+
+here<span style="color:#f92672">::</span><span style="color:#a6e22e">here</span>(<span style="color:#e6db74">&#34;Data&#34;</span>)
+<span style="color:#75715e">## [1] &#34;/Users/art/Documents/Project/Data&#34;</span>
+</code></pre></div><p>We can then work within the <code>Data</code> folder. Here is an example where I make a folder in the <code>Project</code> folder and write/read files to that folder</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">
+<span style="color:#a6e22e">dir.create</span>(here<span style="color:#f92672">::</span><span style="color:#a6e22e">here</span>(<span style="color:#e6db74">&#34;Data&#34;</span>)) <span style="color:#75715e"># make the Data folder</span>
+readr<span style="color:#f92672">::</span><span style="color:#a6e22e">write_csv</span>(iris, here<span style="color:#f92672">::</span><span style="color:#a6e22e">here</span>(<span style="color:#e6db74">&#34;Data&#34;</span>, <span style="color:#e6db74">&#34;iris.csv&#34;</span>)) <span style="color:#75715e"># write iris to a csv</span>
+<span style="color:#a6e22e">head</span>(readr<span style="color:#f92672">::</span><span style="color:#a6e22e">read_csv</span>(here<span style="color:#f92672">::</span><span style="color:#a6e22e">here</span>(<span style="color:#e6db74">&#34;Data&#34;</span>, <span style="color:#e6db74">&#34;iris.csv&#34;</span>))) <span style="color:#75715e"># look at the csv</span>
+
+<span style="color:#75715e">## Rows: 150 Columns: 5</span>
+<span style="color:#75715e">## ── Column specification ────────────────────────────────────────────────────────</span>
+<span style="color:#75715e">## Delimiter: &#34;,&#34;</span>
+<span style="color:#75715e">## chr (1): Species</span>
+<span style="color:#75715e">## dbl (4): Sepal.Length, Sepal.Width, Petal.Length, Petal.Width</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span style="color:#75715e">## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+
+<span style="color:#75715e">## # A tibble: 6 × 5</span>
+<span style="color:#75715e">##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
+<span style="color:#75715e">##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  </span>
+<span style="color:#75715e">## 1          5.1         3.5          1.4         0.2 setosa</span>
+<span style="color:#75715e">## 2          4.9         3            1.4         0.2 setosa</span>
+<span style="color:#75715e">## 3          4.7         3.2          1.3         0.2 setosa</span>
+<span style="color:#75715e">## 4          4.6         3.1          1.5         0.2 setosa</span>
+<span style="color:#75715e">## 5          5           3.6          1.4         0.2 setosa</span>
+<span style="color:#75715e">## 6          5.4         3.9          1.7         0.4 setosa</span>
+
+</code></pre></div>
+</content>
+<p>
+  
+  <a href="https://example.com/blog/code/">#code</a>
+  
+</p>
+
+  </main>
+  <footer>Made with <a href="https://github.com/janraasch/hugo-bearblog/">Hugo ʕ•ᴥ•ʔ Bear</a>
+</footer>
+
+    
+</body>
+
+</html>
