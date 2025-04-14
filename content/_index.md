@@ -24,8 +24,3 @@ me<sup>🌵</sup> mentee<sup>🤩</sup>
 ### contact
 - Email (art.leung \<at\> mail.utoronto.ca)
 - Bluesky ([@aleungplants.bsky.social](https://bsky.app/profile/aleungplants.bsky.social))
-
-### funding acknowledgements
-- Queen Elizabeth II/Charles E. Eckenwalder Scholarship in Science and Technology
-- NSERC Undergraduate Student Research Award
-- NSERC Canadian Forest Sector supplement
