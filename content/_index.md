@@ -4,7 +4,7 @@ title = ""
 
 {{< figure src=/images/portrait.jpg alt="pic of me" width="300" >}}
 
-I'm a PhD candidate with Rowan Sage at the <a href='https://eeb.utoronto.ca'>Dept. of EEB, University of Toronto</a>, defending in August 2026.
+I'm a PhD candidate with Rowan Sage at the <a href='https://eeb.utoronto.ca'>Dept. of EEB, University of Toronto</a>.
 
 Together with Tammy Sage, I use comparative physiology, anatomy, and ultrastructure to study the evolution of C<sub>4</sub> photosynthesis. My thesis develops the idea that latent physiological capacities in plants, revealed as phenotypic plasticity under environmental change, facilitated the origins of derived photosynthetic pathways. More broadly, I'm interested in the ecophysiology of photosynthesis, phylogenetics, and the evolution of complex traits.
 
