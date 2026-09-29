@@ -16,6 +16,7 @@ me<sup>🌵</sup> mentee<sup>🤩</sup>
 [Google Scholar](https://scholar.google.ca/citations?user=BBbYuaIAAAAJ)
 
 - Sage, R.F., Leung, A.<sup>🌵</sup>, Sage, T.L. (in press) Using herbaria to identify the phylogenetic distribution of photosynthetic pathways. Systematic Botany.
+- Leung, A.<sup>🌵</sup>, Ludwig, M., Sage, T.L., Sage, R.F. (submitted) Acclimation to enhanced photorespiratory conditions increases the effectiveness of C<sub>2</sub> photosynthesis in C<sub>3</sub>-C<sub>4</sub> intermediates. [bioRxiv](https://doi.org/10.64898/2026.09.22.753555).
 - Leung, A.<sup>🌵</sup>, Chang, B.S.W., Sage, R.F. (2026) Convergence, stability, and thermal adaptation in the rubisco large subunit in plants. [Evolution](https://doi.org/10.1093/evolut/qpag093).
 - Leung, A.<sup>🌵</sup> (2025) Evolutionary innovation, enablers, and the origin of C<sub>4</sub> plants. [Nature Reviews Biodiversity](https://doi.org/10.1038/s44358-025-00114-0). 1: 753.
 - Leung, A.<sup>🌵</sup>, Patel, R., Chirachon, V., Stata, M., Macfarlane, T.D., Ludwig, M., Busch, F.A., Sage, T.L., Sage, R.F. (2024) *Tribulus* (Zygophyllaceae) as a case study for the evolution of C<sub>2</sub> and C<sub>4</sub> photosynthesis. [Plant, Cell & Environment](https://doi.org/10.1111/pce.15069).
