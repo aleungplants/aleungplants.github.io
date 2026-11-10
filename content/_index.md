@@ -7,6 +7,7 @@ title = ""
 I just defended my PhD thesis with Rowan Sage at the <a href='https://eeb.utoronto.ca'>Dept. of EEB, University of Toronto</a>!
 
 I received my BSc from Western University, where I worked with Norm Hüner on photosynthesis in boreal trees grown under high temperature and CO<sub>2</sub> conditions.
+
 ### publications
 
 me<sup>🌵</sup> mentee<sup>🤩</sup>
